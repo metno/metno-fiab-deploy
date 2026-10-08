@@ -33,5 +33,4 @@ services:
 
 volumes:
   fiab-data:
-  # fiab-home:
   data-cache:
