@@ -15,3 +15,5 @@ docker compose up --build
 ```
 
 ...then open up localhost:8000 in your browser.
+
+Note that in the current setup, fiab will start with no models and no plugins installed. Models from metno's own model repository is available for download.
