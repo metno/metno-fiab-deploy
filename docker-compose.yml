@@ -1,0 +1,37 @@
+name: forecast-in-a-box
+services:
+  forecast-in-a-box:
+    build: .
+    restart: unless-stopped
+    shm_size: "5gb"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    ports:
+      - "8000:8000"
+    volumes:
+      - fiab-data:/data
+      - data-cache:/data_cache/
+      - ./docker/config.toml:/home/fiab/.fiab/config.toml
+    environment:
+      UV_EXTRA_INDEX_URL: https://download.pytorch.org/whl/cu130
+      UV_INDEX_STRATEGY: unsafe-best-match
+      EARTHKIT_DATA_CACHE_POLICY: user
+      EARTHKIT_DATA_USER_CACHE_DIRECTORY: /data_cache/
+      EARTHKIT_DATA_MAXIMUM_CACHE_SIZE: 10G
+      ECMWF_API_URL: "https://api.ecmwf.int/v1"
+      ECMWF_API_KEY: "${ECMWF_API_KEY}"
+      ECMWF_API_EMAIL: "${ECMWF_API_EMAIL}"
+      fiab__db__sqlite_userdb_path: "/data/user.db"
+      fiab__db__sqlite_jobdb_path: "/data/job.db"
+      fiab__backend__data_path: "file:///data"
+
+
+volumes:
+  fiab-data:
+  # fiab-home:
+  data-cache:
