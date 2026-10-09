@@ -17,6 +17,14 @@ git submodule init
 git submodule update
 ```
 
+### Setup .env
+
+.env in metno-fiab-deploy/
+```
+ECMWF_API_KEY=<blah>
+ECMWF_API_EMAIL=<blah>
+```
+
 ### Start service
 
 ```bash
