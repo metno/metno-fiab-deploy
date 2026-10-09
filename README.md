@@ -10,6 +10,15 @@ Having a separate deployment repository gives some benefits:
 
 ## Getting started
 
+### Sync FIAB submodule
+
+```
+git submodule init
+git submodule update
+```
+
+### Start service
+
 ```bash
 docker compose up --build
 ```
